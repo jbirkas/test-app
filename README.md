@@ -22,9 +22,13 @@ npm run build
 docker build -f docker/Dockerfile -t test-app:latest .
 ```
 
-## Run
+## Docker network
 ```bash
 docker network create test-net --gateway=10.10.100.1 --subnet=10.10.100.0/24
+```
+
+## Run
+```bash
 docker run -d --restart always --name test-app --network test-net test-app 
 docker run -d --restart always --name nginx --network test-net -p 80:80 -v `pwd`/nginx:/etc/nginx/conf.d nginx:mainline-alpine
 ```
